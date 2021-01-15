@@ -27,8 +27,15 @@ Fr description
 	<extraSourceFiles>
 		<sourceFile filename="rmod/Main.lua" />
 		<sourceFile filename="utility/Main.lua" />
+		<sourceFile filename="rset/Main.lua" />
 		<sourceFile filename="progressiveSteering.lua" />
 	</extraSourceFiles>
+
+	<l10n>
+		<text name="ps_test_text">
+			<en>Test text</en>
+		</text>
+	</l10n>
 </modDesc>
 
 <!--

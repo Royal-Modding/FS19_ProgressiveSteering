@@ -7,6 +7,7 @@
 
 InitRoyalMod(Utils.getFilename("rmod/", g_currentModDirectory))
 InitRoyalUtility(Utils.getFilename("utility/", g_currentModDirectory))
+InitRoyalSettings(Utils.getFilename("rset/", g_currentModDirectory))
 
 ---@class PogressiveSteering
 ProgressiveSteering = RoyalMod.new(r_debug_r, false)
@@ -69,17 +70,6 @@ function ProgressiveSteering:initialize()
 end
 
 function ProgressiveSteering:onValidateVehicleTypes(vehicleTypeManager, addSpecialization, addSpecializationBySpecialization, addSpecializationByVehicleType, addSpecializationByFunction)
-    -- @param specName string name of the spec to add
-    --addSpecialization("specName")
-    -- @param specName string name of the spec to add
-    -- @param requiredSpecName string name of the required spec
-    --addSpecializationBySpecialization("specName", "requiredSpecName")
-    -- @param specName string name of the spec to add
-    -- @param requiredVehicleTypeName string name of the required vehicle type
-    --addSpecializationByVehicleType("specName", "requiredVehicleTypeName")
-    -- @param specName string name of the spec to add
-    -- @param function function if return true spec will be added to the current vehicle type
-    --addSpecializationByFunction("specName", function(vehicleType) return false end)
 end
 
 function ProgressiveSteering:onMissionInitialize(baseDirectory, missionCollaborators)
@@ -89,6 +79,9 @@ function ProgressiveSteering:onSetMissionInfo(missionInfo, missionDynamicInfo)
 end
 
 function ProgressiveSteering:onLoad()
+    g_royalSettings:registerMod(self.name, "", "")
+    g_royalSettings:registerSetting(self.name, "precision", g_royalSettings.TYPES.GLOBAL, g_royalSettings.OWNERS.USER, 6, {0, 1, 2, 3, 4, 5}, {"ps_test_text", "$l10n_ps_test_text"}, "")
+    g_royalSettings:registerSetting(self.name, "enabled", g_royalSettings.TYPES.GLOBAL, g_royalSettings.OWNERS.USER, 2, {false, true}, {"On", "Off"}, "")
 end
 
 function ProgressiveSteering:onPreLoadMap(mapFile)
