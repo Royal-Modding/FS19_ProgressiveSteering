@@ -2,7 +2,7 @@
 -- Royal Utility
 --
 -- @author Royal Modding
--- @version 1.7.0.0
+-- @version 1.7.1.0
 -- @date 05/01/2021
 
 --- String utilities class
@@ -102,4 +102,14 @@ function StringUtility.split(s, sep)
         end
     )
     return fields
+end
+
+--- Get translated text
+---@param key string text key prefixed with "$l10n_"
+---@return string text translated text
+function StringUtility.parseI18NText(key)
+    if key == nil then
+        return ""
+    end
+    return g_i18n:convertText(key)
 end

@@ -9,8 +9,7 @@
 ---@param libDirectory string
 function InitRoyalSettings(libDirectory)
     source(Utils.getFilename("RoyalSettings.lua", libDirectory))
-    source(Utils.getFilename("RoyalSetting.lua", libDirectory))
-    source(Utils.getFilename("RoyalSettingGlobal.lua", libDirectory))
+    RoyalSettings.libDirectory = libDirectory
     g_logManager:devInfo("r_title_r loaded successfully by " .. g_currentModName)
     return true
 end

@@ -19,30 +19,23 @@ function RoyalSetting:new(mt)
     return rs
 end
 
-function RoyalSetting:initialize(key, modName, name, defaultIndex, values, texts, tooltip)
+function RoyalSetting:initialize(key, modName, name, defaultIndex, values, texts, description, tooltip)
     self.key = key
     self.modName = modName
     self.name = name
     self.options = {}
     for i, value in ipairs(values) do
-        self.options[i] = {value = value, text = self:parseText(texts[i])}
+        self.options[i] = {value = value, text = StringUtility.parseI18NText(texts[i])}
     end
     if self.options[defaultIndex] ~= nil then
         self.selected = defaultIndex
     else
         self.selected = 1
     end
-    self.tooltip = tooltip
+    self.tooltip = StringUtility.parseI18NText(tooltip)
+    self.description = StringUtility.parseI18NText(description)
     return true
 end
-
-function RoyalSetting:parseText(text)
-    if text == nil then
-        return ""
-    end
-    return g_i18n:convertText(text)
-end
-
 function RoyalSetting:select(index)
     if self.options[index] ~= nil then
         self.selected = index
