@@ -56,6 +56,7 @@ function RoyalSettings:initialize()
 
     Utility.prependedFunction(Mission00, "loadMission00Finished", self.onLoad)
     Utility.appendedFunction(FSBaseMission, "saveSavegame", self.onSaveSavegame)
+    Utility.appendedFunction(BaseMission, "keyEvent", self.onKeyEvent)
 
     g_logManager:devInfo("Initializing r_title_r from " .. self.loadingModName)
 end
@@ -66,7 +67,6 @@ function RoyalSettings:onLoad()
     self:onLoadSavegame()
 
     self.guis = {}
-    self.guis.pages = {}
     self.guis.pagesIds = {}
     local settingsGuiPageXml = loadXMLFile("settingsGuiPageXml", self.guiDirectory .. "SettingsGuiPage.xml")
     local settingsGuiXml = loadXMLFile("settingsGuiXml", self.guiDirectory .. "SettingsGui.xml")
@@ -77,7 +77,7 @@ function RoyalSettings:onLoad()
         table.insert(self.guis.pagesIds, m.guiPageName)
 
         setXMLString(settingsGuiPageXml, "GUI#name", m.guiPageName)
-        self.guis.pages[m.name] = self.createGui(settingsGuiPageXml, m.guiPageName, SettingsGuiPage:new(), true)
+        self.createGui(settingsGuiPageXml, m.guiPageName, SettingsGuiPage:new(), true)
 
         local tmpKey = string.format("GUI.GuiElement(2).GuiElement.GuiElement(%d)", index)
         setXMLString(settingsGuiXml, tmpKey .. "#type", "frameReference")
@@ -87,7 +87,7 @@ function RoyalSettings:onLoad()
         index = index + 1
     end
     delete(settingsGuiPageXml)
-    self.guis.settings = self.createGui(settingsGuiXml, self.settingsGuiName, SettingsGui:new())
+    self.createGui(settingsGuiXml, self.settingsGuiName, SettingsGui:new())
     delete(settingsGuiXml)
 end
 
@@ -127,14 +127,21 @@ function RoyalSettings:onSaveSavegame()
     end
 end
 
+function RoyalSettings:onKeyEvent(unicode, sym, modifier, isDown)
+    self = g_royalSettings
+    if sym == Input.KEY_r and isDown and bitAND(modifier, Input.MOD_RSHIFT) > 0 then
+        self:openGui()
+    end
+end
+
 function RoyalSettings:onGuiClosed()
     --TODO: not all kind of settings have to be saved on gui closed
-    self:onSaveSavegame()
+    self.onSaveSavegame()
 end
 
 --- Open settings gui
 function RoyalSettings:openGui()
-    if not self.guis.settings.isOpen then
+    if not g_gui:getIsGuiVisible() and not g_gui:getIsDialogVisible() and not g_gui:getIsOverlayGuiVisible() then
         g_gui:showGui(self.settingsGuiName)
     end
 end
