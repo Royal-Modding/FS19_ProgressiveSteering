@@ -132,16 +132,23 @@ function RoyalSettings:onGuiClosed()
     self:onSaveSavegame()
 end
 
+--- Open settings gui
 function RoyalSettings:openGui()
     if not self.guis.settings.isOpen then
         g_gui:showGui(self.settingsGuiName)
     end
 end
 
+--- Register a mod tab
+---@param modName string
+---@param icon string
+---@param description string
+---@return RoyalSettingsMod
 function RoyalSettings:registerMod(modName, icon, description)
     if self.registrationEnabled then
         if self.mods[modName] == nil then
             self.mods[modName] = RoyalSettingsMod.new(modName, icon, description)
+            return self.mods[modName]
         else
             g_logManager:devError("[r_title_r] Tab for '%s' is already registered", modName)
         end
@@ -150,6 +157,17 @@ function RoyalSettings:registerMod(modName, icon, description)
     end
 end
 
+--- Register a mod setting
+---@param modName string
+---@param settingName string
+---@param settingType integer
+---@param settingOwner integer
+---@param defaultIndex integer
+---@param values any[]
+---@param texts string[]
+---@param description string
+---@param tooltip string
+---@return RoyalSetting
 function RoyalSettings:registerSetting(modName, settingName, settingType, settingOwner, defaultIndex, values, texts, description, tooltip)
     if self.registrationEnabled then
         if self.mods[modName] ~= nil then
@@ -162,7 +180,7 @@ function RoyalSettings:registerSetting(modName, settingName, settingType, settin
                     if newSetting:initialize(key, modName, settingName, defaultIndex, values, texts, description, tooltip) then
                         self.settings[key] = newSetting
                         self.mods[modName]:addSetting(newSetting)
-                        return key
+                        return self.settings[key]
                     end
                 else
                     g_logManager:devError("[r_title_r] Setting with key '%s' is already registered", key)
@@ -239,6 +257,11 @@ if game.g_royalSettings == nil then
             if rs ~= nil and rs.obj ~= nil and rs.obj.initialize ~= nil and rs.rev > hRevision then
                 hRevision = rs.rev
                 object = rs.obj
+            end
+        end
+        for _, rs in ipairs(game.g_royalSettings.instances) do
+            if rs ~= object then
+                rs = nil
             end
         end
         g_royalSettings = object

@@ -16,6 +16,7 @@ function RoyalSetting:new(mt)
     ---@type RoyalSetting
     local rs = setmetatable({}, mt or RoyalSetting_mt)
     rs.genv = getfenv(0)
+    rs.callbacks = {}
     return rs
 end
 
@@ -36,9 +37,11 @@ function RoyalSetting:initialize(key, modName, name, defaultIndex, values, texts
     self.description = StringUtility.parseI18NText(description)
     return true
 end
+
 function RoyalSetting:select(index)
     if self.options[index] ~= nil then
         self.selected = index
+        self:callCallbacks()
     end
 end
 
@@ -64,4 +67,21 @@ end
 
 function RoyalSetting:loadFromXMLFile(xmlId, key)
     self:select(getXMLInt(xmlId, string.format("%s.%s#si", key, self.key)) or self:getSelectedIndex())
+end
+
+--- Adds callback for setting change notifications
+---@param callback fun(selectedValue:any, selectedIndex:integer, settingKey:string, settingName:string, settingModName:string) callback function
+---@param callObject any callback object
+function RoyalSetting:addCallback(callback, callObject)
+    table.insert(self.callbacks, {callback = callback, callObject = callObject})
+end
+
+function RoyalSetting:callCallbacks(callback, callObject)
+    for _, cbs in ipairs(self.callbacks) do
+        if cbs.callObject ~= nil then
+            cbs.callback(cbs.callObject, self:getSelectedValue(), self:getSelectedIndex(), self.key, self.name, self.modName)
+        else
+            cbs.callback(self:getSelectedValue(), self:getSelectedIndex(), self.key, self.name, self.modName)
+        end
+    end
 end
