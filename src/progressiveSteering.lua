@@ -9,26 +9,11 @@ InitRoyalMod(Utils.getFilename("rmod/", g_currentModDirectory))
 InitRoyalUtility(Utils.getFilename("utility/", g_currentModDirectory))
 InitRoyalSettings(Utils.getFilename("rset/", g_currentModDirectory))
 
----@class PogressiveSteering
+---@class PogressiveSteering : RoyalMod
 ProgressiveSteering = RoyalMod.new(r_debug_r, false)
 ProgressiveSteering.curves = {}
 ProgressiveSteering.curveType = 6
-
-function ProgressiveSteering.catmullRomInterpolator1(first, second, beforeFirst, afterSecond, alpha)
-    alpha = 1 - alpha
-    local alpha2 = alpha * alpha
-    local alpha3 = alpha2 * alpha
-
-    if beforeFirst == nil then
-        beforeFirst = {2 * first[1] - second[1]}
-    end
-
-    if afterSecond == nil then
-        afterSecond = {2 * second[1] - first[1]}
-    end
-
-    return 0.5 * ((2 * first[1]) + (-beforeFirst[1] + second[1]) * alpha + (2 * beforeFirst[1] - 5 * first[1] + 4 * second[1] - afterSecond[1]) * alpha2 + (-beforeFirst[1] + 3 * first[1] - 3 * second[1] + afterSecond[1]) * alpha3)
-end
+ProgressiveSteering.enabled = true
 
 function ProgressiveSteering:initialize()
     addConsoleCommand("psSetCurve", "", "setCurveType", self)
@@ -38,7 +23,7 @@ function ProgressiveSteering:initialize()
     ProgressiveSteering.curves[3] = AnimCurve:new(linearInterpolator1)
     ProgressiveSteering.curves[4] = AnimCurve:new(linearInterpolator1)
     ProgressiveSteering.curves[5] = AnimCurve:new(InterpolatorUtility.exponential11Interpolator1)
-    ProgressiveSteering.curves[6] = AnimCurve:new(ProgressiveSteering.catmullRomInterpolator1, 3)
+    ProgressiveSteering.curves[6] = AnimCurve:new(InterpolatorUtility.catmullRomInterpolator1, 3)
 
     self.curves[1]:addKeyframe({0, time = 0})
     self.curves[1]:addKeyframe({0.1, time = 0.3})
@@ -79,9 +64,17 @@ function ProgressiveSteering:onSetMissionInfo(missionInfo, missionDynamicInfo)
 end
 
 function ProgressiveSteering:onLoad()
-    g_royalSettings:registerMod(self.name, "", "")
-    g_royalSettings:registerSetting(self.name, "precision", g_royalSettings.TYPES.GLOBAL, g_royalSettings.OWNERS.USER, 6, {0, 1, 2, 3, 4, 5}, {"ps_test_text", "$l10n_ps_test_text"}, "")
-    g_royalSettings:registerSetting(self.name, "enabled", g_royalSettings.TYPES.GLOBAL, g_royalSettings.OWNERS.USER, 2, {false, true}, {"On", "Off"}, "")
+    g_royalSettings:registerMod(self.name, self.directory .. "settings_icon.dds", "$l10n_ps_test_text")
+    g_royalSettings:registerSetting(self.name, "precision", g_royalSettings.TYPES.GLOBAL, g_royalSettings.OWNERS.USER, 6, {1, 2, 3, 4, 5, 6}, {"2", "3", "4", "5", "6", "7"}, "Precision", "tooltip 1"):addCallback(self.onCurveChange, self)
+    g_royalSettings:registerSetting(self.name, "enabled", g_royalSettings.TYPES.GLOBAL, g_royalSettings.OWNERS.USER, 2, {false, true}, {"$l10n_ui_off", "$l10n_ui_on"}, "Enabled", "tooltip 2"):addCallback(self.onEnableDisable, self)
+end
+
+function ProgressiveSteering:onEnableDisable(value)
+    self.enabled = value
+end
+
+function ProgressiveSteering:onCurveChange(value)
+    self.curveType = value
 end
 
 function ProgressiveSteering:onPreLoadMap(mapFile)
@@ -142,8 +135,10 @@ function ProgressiveSteering:onKeyEvent(unicode, sym, modifier, isDown)
 end
 
 function ProgressiveSteering:onDraw()
-    local scale = 1.5
-    Utility.renderAnimCurve(0.5 - ((0.1125 * scale) / 2), 0.5 - ((0.2 * scale) / 2), 0.1125 * scale, 0.2 * scale, self.curves[self.curveType], 50)
+    if self.enabled and self.debug then
+        local scale = 1.5
+        Utility.renderAnimCurve(0.5 - ((0.1125 * scale) / 2), 0.5 - ((0.2 * scale) / 2), 0.1125 * scale, 0.2 * scale, self.curves[self.curveType], 50)
+    end
 end
 
 function ProgressiveSteering:onPreSaveSavegame(savegameDirectory, savegameIndex)
@@ -159,7 +154,8 @@ function ProgressiveSteering:onDeleteMap()
 end
 
 function ProgressiveSteering:setCurveType(type)
-    self.curveType = tonumber(type)
+    --self.curveType = tonumber(type)
+    --g_royalSettings:openGui()
 end
 
 function Drivable.actionEventSteer(self, actionName, inputValue, callbackState, isAnalog, isMouse, deviceCategory)

@@ -1,8 +1,8 @@
 --
--- ${title}
+-- Royal Settings
 --
--- @author ${author}
--- @version ${version}
+-- @author Royal Modding
+-- @version 1.0.0.0
 -- @date 18/01/2021
 
 SettingsGuiPage = {}

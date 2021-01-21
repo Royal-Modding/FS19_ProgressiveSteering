@@ -1,8 +1,8 @@
 --
--- ${title}
+-- Royal Settings
 --
--- @author ${author}
--- @version ${version}
+-- @author Royal Modding
+-- @version 1.0.0.0
 -- @date 12/01/2021
 
 ---@class RoyalSettings
@@ -58,7 +58,7 @@ function RoyalSettings:initialize()
     Utility.appendedFunction(FSBaseMission, "saveSavegame", self.onSaveSavegame)
     Utility.appendedFunction(BaseMission, "keyEvent", self.onKeyEvent)
 
-    g_logManager:devInfo("Initializing r_title_r from " .. self.loadingModName)
+    g_logManager:devInfo("Initializing Royal Settings from " .. self.loadingModName)
 end
 
 function RoyalSettings:onLoad()
@@ -157,10 +157,10 @@ function RoyalSettings:registerMod(modName, icon, description)
             self.mods[modName] = RoyalSettingsMod.new(modName, icon, description)
             return self.mods[modName]
         else
-            g_logManager:devError("[r_title_r] Tab for '%s' is already registered", modName)
+            g_logManager:devError("[Royal Settings] Tab for '%s' is already registered", modName)
         end
     else
-        g_logManager:devError("[r_title_r] Mods / tabs registration isn't allowd at this time")
+        g_logManager:devError("[Royal Settings] Mods / tabs registration isn't allowd at this time")
     end
 end
 
@@ -190,16 +190,16 @@ function RoyalSettings:registerSetting(modName, settingName, settingType, settin
                         return self.settings[key]
                     end
                 else
-                    g_logManager:devError("[r_title_r] Setting with key '%s' is already registered", key)
+                    g_logManager:devError("[Royal Settings] Setting with key '%s' is already registered", key)
                 end
             else
-                g_logManager:devError("[r_title_r] Can't find a proper setting class for (%d, %d) type / owner combination", settingType, settingOwner)
+                g_logManager:devError("[Royal Settings] Can't find a proper setting class for (%d, %d) type / owner combination", settingType, settingOwner)
             end
         else
-            g_logManager:devError("[r_title_r] Tab for '%s' isn't still registered", modName)
+            g_logManager:devError("[Royal Settings] Tab for '%s' isn't still registered", modName)
         end
     else
-        g_logManager:devError("[r_title_r] Settings registration isn't allowd at this time")
+        g_logManager:devError("[Royal Settings] Settings registration isn't allowd at this time")
     end
 end
 

@@ -1,8 +1,8 @@
 --
--- ${title}
+-- Royal Settings
 --
--- @author ${author}
--- @version ${version}
+-- @author Royal Modding
+-- @version 1.0.0.0
 -- @date 12/01/2021
 
 --- Initialize RoyalSettings library
@@ -10,6 +10,6 @@
 function InitRoyalSettings(libDirectory)
     source(Utils.getFilename("RoyalSettings.lua", libDirectory))
     RoyalSettings.libDirectory = libDirectory
-    g_logManager:devInfo("r_title_r loaded successfully by " .. g_currentModName)
+    g_logManager:devInfo("Royal Settings loaded successfully by " .. g_currentModName)
     return true
 end
