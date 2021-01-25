@@ -16,8 +16,6 @@ ProgressiveSteering.curveType = 6
 ProgressiveSteering.enabled = true
 
 function ProgressiveSteering:initialize()
-    addConsoleCommand("psSetCurve", "", "setCurveType", self)
-
     ProgressiveSteering.curves[1] = AnimCurve:new(linearInterpolator1)
     ProgressiveSteering.curves[2] = AnimCurve:new(linearInterpolator1)
     ProgressiveSteering.curves[3] = AnimCurve:new(linearInterpolator1)
@@ -54,19 +52,23 @@ function ProgressiveSteering:initialize()
     self.curves[6]:addKeyframe({1, time = 1})
 end
 
-function ProgressiveSteering:onValidateVehicleTypes(vehicleTypeManager, addSpecialization, addSpecializationBySpecialization, addSpecializationByVehicleType, addSpecializationByFunction)
-end
-
-function ProgressiveSteering:onMissionInitialize(baseDirectory, missionCollaborators)
-end
-
-function ProgressiveSteering:onSetMissionInfo(missionInfo, missionDynamicInfo)
-end
-
 function ProgressiveSteering:onLoad()
-    g_royalSettings:registerMod(self.name, self.directory .. "settings_icon.dds", "$l10n_ps_test_text")
-    g_royalSettings:registerSetting(self.name, "precision", g_royalSettings.TYPES.GLOBAL, g_royalSettings.OWNERS.USER, 6, {1, 2, 3, 4, 5, 6}, {"2", "3", "4", "5", "6", "7"}, "Precision", "tooltip 1"):addCallback(self.onCurveChange, self)
-    g_royalSettings:registerSetting(self.name, "enabled", g_royalSettings.TYPES.GLOBAL, g_royalSettings.OWNERS.USER, 2, {false, true}, {"$l10n_ui_off", "$l10n_ui_on"}, "Enabled", "tooltip 2"):addCallback(self.onEnableDisable, self)
+    g_royalSettings:registerMod(self.name, self.directory .. "settings_icon.dds", "$l10n_ps_mod_settings_title")
+    g_royalSettings:registerSetting(self.name, "enabled", g_royalSettings.TYPES.GLOBAL, g_royalSettings.OWNERS.USER, 2, {false, true}, {"$l10n_ui_off", "$l10n_ui_on"}, "$l10n_ps_setting_enabled", "$l10n_ps_setting_enabled_tooltip"):addCallback(
+        self.onEnableDisable,
+        self
+    )
+    g_royalSettings:registerSetting(
+        self.name,
+        "precision",
+        g_royalSettings.TYPES.GLOBAL,
+        g_royalSettings.OWNERS.USER,
+        6,
+        {1, 2, 3, 4, 5, 6},
+        {"$l10n_ps_setting_precision_1", "$l10n_ps_setting_precision_2", "$l10n_ps_setting_precision_3", "$l10n_ps_setting_precision_4", "$l10n_ps_setting_precision_5", "$l10n_ps_setting_precision_6"},
+        "$l10n_ps_setting_precision",
+        "$l10n_ps_setting_precision_tooltip"
+    ):addCallback(self.onCurveChange, self)
 end
 
 function ProgressiveSteering:onEnableDisable(value)
@@ -77,63 +79,6 @@ function ProgressiveSteering:onCurveChange(value)
     self.curveType = value
 end
 
-function ProgressiveSteering:onPreLoadMap(mapFile)
-end
-
-function ProgressiveSteering:onCreateStartPoint(startPointNode)
-end
-
-function ProgressiveSteering:onLoadMap(mapNode, mapFile)
-end
-
-function ProgressiveSteering:onPostLoadMap(mapNode, mapFile)
-end
-
-function ProgressiveSteering:onLoadSavegame(savegameDirectory, savegameIndex)
-end
-
-function ProgressiveSteering:onPreLoadVehicles(xmlFile, resetVehicles)
-end
-
-function ProgressiveSteering:onPreLoadItems(xmlFile)
-end
-
-function ProgressiveSteering:onPreLoadOnCreateLoadedObjects(xmlFile)
-end
-
-function ProgressiveSteering:onLoadFinished()
-end
-
-function ProgressiveSteering:onStartMission()
-end
-
-function ProgressiveSteering:onMissionStarted()
-end
-
-function ProgressiveSteering:onWriteStream(streamId)
-end
-
-function ProgressiveSteering:onReadStream(streamId)
-end
-
-function ProgressiveSteering:onUpdate(dt)
-end
-
-function ProgressiveSteering:onUpdateTick(dt)
-end
-
-function ProgressiveSteering:onWriteUpdateStream(streamId, connection, dirtyMask)
-end
-
-function ProgressiveSteering:onReadUpdateStream(streamId, timestamp, connection)
-end
-
-function ProgressiveSteering:onMouseEvent(posX, posY, isDown, isUp, button)
-end
-
-function ProgressiveSteering:onKeyEvent(unicode, sym, modifier, isDown)
-end
-
 function ProgressiveSteering:onDraw()
     if self.enabled and self.debug then
         local scale = 1.5
@@ -141,31 +86,13 @@ function ProgressiveSteering:onDraw()
     end
 end
 
-function ProgressiveSteering:onPreSaveSavegame(savegameDirectory, savegameIndex)
-end
-
-function ProgressiveSteering:onPostSaveSavegame(savegameDirectory, savegameIndex)
-end
-
-function ProgressiveSteering:onPreDeleteMap()
-end
-
-function ProgressiveSteering:onDeleteMap()
-end
-
-function ProgressiveSteering:setCurveType(type)
-    --self.curveType = tonumber(type)
-    --g_royalSettings:openGui()
-end
-
-function Drivable.actionEventSteer(self, actionName, inputValue, callbackState, isAnalog, isMouse, deviceCategory)
+function Drivable.actionEventSteer(self, _, inputValue, _, isAnalog, _, deviceCategory)
     local spec = self.spec_drivable
-
     spec.lastInputValues.axisSteer = inputValue
     if inputValue ~= 0 then
         spec.lastInputValues.axisSteerIsAnalog = isAnalog
         spec.lastInputValues.axisSteerDeviceCategory = deviceCategory
-        if isAnalog then
+        if isAnalog and ProgressiveSteering.enabled then
             spec.lastInputValues.axisSteer = inputValue * ProgressiveSteering.curves[ProgressiveSteering.curveType]:get(math.abs(Utility.clamp(-1, inputValue, 1)))
         end
     end
