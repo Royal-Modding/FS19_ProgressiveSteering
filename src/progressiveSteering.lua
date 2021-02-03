@@ -1,9 +1,8 @@
---
--- ${title}
---
--- @author ${author}
--- @version ${version}
--- @date 11/01/2021
+--- ${title}
+
+---@author ${author}
+---@version r_version_r
+---@date 11/01/2021
 
 InitRoyalMod(Utils.getFilename("rmod/", g_currentModDirectory))
 InitRoyalUtility(Utils.getFilename("utility/", g_currentModDirectory))
