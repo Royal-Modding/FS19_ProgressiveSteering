@@ -47,46 +47,57 @@ En mode multijoueur, chacun aura ses propres paramètres personnalisés.
 		<text name="ps_mod_settings_title">
 			<en>Progressive Steering Settings</en>
 			<de>Progressive Steering einstellungen</de>
+			<pl>Ustawienia Progressive Steering</pl>
 		</text>
 		<text name="ps_setting_precision">
 			<en>Precision</en>
 			<de>Genauigkeit</de>
+			<pl>Precyzja</pl>
 		</text>
 		<text name="ps_setting_precision_1">
 			<en>Low</en>
 			<de>Niedrig</de>
+			<pl>Niska</pl>
 		</text>
 		<text name="ps_setting_precision_2">
 			<en>Medium</en>
 			<de>Mittel</de>
+			<pl>Średnia</pl>
 		</text>
 		<text name="ps_setting_precision_3">
 			<en>High</en>
 			<de>Hoch</de>
+			<pl>Wysoka</pl>
 		</text>
 		<text name="ps_setting_precision_4">
 			<en>Very High</en>
 			<de>Sehr hoch</de>
+			<pl>Bardzo wysoka</pl>
 		</text>
 		<text name="ps_setting_precision_5">
 			<en>Partial</en>
 			<de>Teilweise</de>
+			<pl>Częściowa</pl>
 		</text>
 		<text name="ps_setting_precision_6">
 			<en>Smooth</en>
 			<de>Glatt</de>
+			<pl>Gładka</pl>
 		</text>
 		<text name="ps_setting_precision_tooltip">
 			<en>Choose the precision that better fit with your hardware and driving style.</en>
 			<de>Wählen Sie die Präzision, die besser mit Ihrer Hardware und Ihrem Fahrstil passt.</de>
+			<pl>Wybierz precyzję, która najlepiej lepiej pasuje do Twojego sprzętu i stylu jazdy.</pl>
 		</text>
 		<text name="ps_setting_enabled">
 			<en>Enabled</en>
 			<de>Aktiviert</de>
+			<pl>Włączona</pl>
 		</text>
 		<text name="ps_setting_enabled_tooltip">
 			<en>Enable / Disable progressive steering.</en>
 			<de>Aktivieren / Deaktivieren Der Progressive Steering.</de>
+			<pl>Włącz/Wyłącz Progressive Steering</pl>
 		</text>
 	</l10n>
 </modDesc>
