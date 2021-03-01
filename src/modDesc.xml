@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="${descVersion}">
 	<author>${author}</author>
 	<version>${version}</version>
@@ -13,6 +13,10 @@ This significantly increase the precision in high-speed maneuvering.
 On twisting roads and at junctions, the driver will notice a more dynamic response as a result of the more direct steering.
 This mod is especially aimed for gamepads and medium to low degrees steering-wheels, you can change the settings to better fit your hardware and driving style by pressing "RSHIFT + R".
 On multiplayer everyone will have it's own custom settings.
+
+Changelog ${version}:
+- Added new translations
+- Added adaptive steering (increase control at high speeds)
 ]]>
 		</en>
 		<de>
@@ -22,6 +26,10 @@ Dadurch wird die Präzision beim Manövrieren bei hohen Geschwindigkeiten deutli
 Auf kurvigen Straßen und an Kreuzungen wird der Fahrer durch die direktere Lenkung ein dynamischeres Ansprechverhalten bemerken.
 Dieser Mod ist speziell für Gamepads und Lenkräder mit mittlerem bis niedrigem Lenkeinschlag gedacht. Sie können die Einstellungen mit "RSHIFT + R" an Ihre Hardware und Ihren Fahrstil anpassen.
 Im Multiplayer wird jeder seine eigenen Einstellungen haben.
+
+Changelog ${version}:
+- Neue Übersetzungen hinzugefügt
+- Adaptive Lenkung hinzugefügt (Kontrolle bei hohen Geschwindigkeiten erhöhen)
 ]]>
 		</de>
 		<fr>
@@ -31,6 +39,10 @@ Cela augmente considérablement la précision des manœuvres à grande vitesse.
 Sur les routes sinueuses et aux carrefours, le conducteur constatera une réponse plus dynamique grâce à la direction plus directe.
 Ce mode est spécialement conçu pour les manettes de jeu et les volants à moyen et bas degrés. Vous pouvez modifier les réglages pour mieux adapter votre matériel et votre style de conduite en appuyant sur "RSHIFT + R".
 En mode multijoueur, chacun aura ses propres paramètres personnalisés.
+
+Changelog ${version}:
+- Ajout de nouvelles traductions
+- Direction adaptative ajoutée (augmentation du contrôle à haute vitesse)
 ]]>
 		</fr>
 	</description>
@@ -98,6 +110,14 @@ En mode multijoueur, chacun aura ses propres paramètres personnalisés.
 			<en>Enable / Disable progressive steering.</en>
 			<de>Aktivieren / Deaktivieren Der Progressive Steering.</de>
 			<pl>Włącz/Wyłącz Progressive Steering</pl>
+		</text>
+		<text name="ps_setting_a_enabled">
+			<en>Adaptive Steering</en>
+			<de>Adaptive Lenkung</de>
+		</text>
+		<text name="ps_setting_a_enabled_tooltip">
+			<en>Enable / Disable adaptive steering (increase control at high speeds).</en>
+			<de>Aktivieren / Deaktivieren der adaptiven Lenkung (Erhöhung der Kontrolle bei hohen Geschwindigkeiten).</de>
 		</text>
 	</l10n>
 </modDesc>

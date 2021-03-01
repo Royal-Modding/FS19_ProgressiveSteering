@@ -13,6 +13,9 @@ ProgressiveSteering = RoyalMod.new(r_debug_r, false)
 ProgressiveSteering.curves = {}
 ProgressiveSteering.curveType = 6
 ProgressiveSteering.enabled = true
+ProgressiveSteering.adaptiveEnabled = 1
+ProgressiveSteering.adaptiveStartSpeed = 18
+ProgressiveSteering.adaptiveEndSpeed = 45
 
 function ProgressiveSteering:initialize()
     ProgressiveSteering.curves[1] = AnimCurve:new(linearInterpolator1)
@@ -57,6 +60,10 @@ function ProgressiveSteering:onLoad()
         self.onEnableDisable,
         self
     )
+    g_royalSettings:registerSetting(self.name, "adaptive_enabled", g_royalSettings.TYPES.GLOBAL, g_royalSettings.OWNERS.USER, 2, {0, 1}, {"$l10n_ui_off", "$l10n_ui_on"}, "$l10n_ps_setting_a_enabled", "$l10n_ps_setting_a_enabled_tooltip"):addCallback(
+        self.onAdaptiveEnableDisable,
+        self
+    )
     g_royalSettings:registerSetting(
         self.name,
         "precision",
@@ -74,6 +81,10 @@ function ProgressiveSteering:onEnableDisable(value)
     self.enabled = value
 end
 
+function ProgressiveSteering:onAdaptiveEnableDisable(value)
+    self.adaptiveEnabled = value
+end
+
 function ProgressiveSteering:onCurveChange(value)
     self.curveType = value
 end
@@ -88,11 +99,17 @@ end
 function Drivable.actionEventSteer(self, _, inputValue, _, isAnalog, _, deviceCategory)
     local spec = self.spec_drivable
     spec.lastInputValues.axisSteer = inputValue
+
+    local ps = ProgressiveSteering
+    local speed = self.lastSpeedReal * 3600
+    local adaptiveDiff = ps.adaptiveEndSpeed - ps.adaptiveStartSpeed
+    local adaptiveFactor = 1 + ((Utility.clamp(0, speed - ps.adaptiveStartSpeed, adaptiveDiff) / adaptiveDiff) * ps.adaptiveEnabled)
+
     if inputValue ~= 0 then
         spec.lastInputValues.axisSteerIsAnalog = isAnalog
         spec.lastInputValues.axisSteerDeviceCategory = deviceCategory
-        if isAnalog and ProgressiveSteering.enabled then
-            spec.lastInputValues.axisSteer = inputValue * ProgressiveSteering.curves[ProgressiveSteering.curveType]:get(math.abs(Utility.clamp(-1, inputValue, 1)))
+        if isAnalog and ps.enabled then
+            spec.lastInputValues.axisSteer = (inputValue * ps.curves[ps.curveType]:get(math.abs(Utility.clamp(-1, inputValue, 1)))) / adaptiveFactor
         end
     end
 end
