@@ -114,10 +114,12 @@ Changelog ${version}:
 		<text name="ps_setting_a_enabled">
 			<en>Adaptive Steering</en>
 			<de>Adaptive Lenkung</de>
+			<pl>Sterowania adaptacyjne</pl>
 		</text>
 		<text name="ps_setting_a_enabled_tooltip">
 			<en>Enable / Disable adaptive steering (increase control at high speeds).</en>
 			<de>Aktivieren / Deaktivieren der adaptiven Lenkung (Erhöhung der Kontrolle bei hohen Geschwindigkeiten).</de>
+			<pl>Włącza/Wyłącza sterowania adaptacyjne (zwiększona kntrola przy wyższej prędkości).</pl>
 		</text>
 	</l10n>
 </modDesc>
