@@ -7,7 +7,7 @@ This mod is especially aimed for gamepads and medium to low degrees steering-whe
 **On multiplayer everyone will have it's own custom settings.**
 
 ---
-:de:
+![iconfinder_flag-germany_748067](https://user-images.githubusercontent.com/7534621/114938948-08f06580-9e40-11eb-9bd9-cd9733f1c6bc.png)
 
 Wie der Name schon sagt, basiert die Progressivlenkung auf einer progressiven Lenkübersetzung.
 Dadurch wird die Präzision beim Manövrieren bei hohen Geschwindigkeiten deutlich erhöht.
@@ -16,7 +16,7 @@ Dieser Mod ist speziell für Gamepads und Lenkräder mit mittlerem bis niedrigem
 **Im Multiplayer wird jeder seine eigenen Einstellungen haben.**
 
 ---
-:fr:
+![iconfinder_flag-france_748130](https://user-images.githubusercontent.com/7534621/114938931-02fa8480-9e40-11eb-84bb-b0c216000de9.png)  
 
 Comme son nom l'indique, le pilotage progressif est basé sur un rapport de pilotage progressif.
 Cela augmente considérablement la précision des manœuvres à grande vitesse.
@@ -25,7 +25,7 @@ Ce mode est spécialement conçu pour les manettes de jeu et les volants à moye
 **En mode multijoueur, chacun aura ses propres paramètres personnalisés.**
 
 ---
-:it:
+![iconfinder_flag-italy_748049](https://user-images.githubusercontent.com/7534621/114938787-d3e41300-9e3f-11eb-9554-0e40597cec5d.png)
 
 Come suggerisce il nome, la mod progressive steering aggiunge un rapporto di sterzo progressivo.
 Ciò aumenta notevolmente la precisione nelle manovre ad alta velocità.
