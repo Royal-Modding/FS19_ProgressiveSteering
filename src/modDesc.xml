@@ -34,10 +34,10 @@ Changelog ${version}:
 		</de>
 		<fr>
 			<![CDATA[
-Comme son nom l'indique, le pilotage progressif est basé sur un rapport de pilotage progressif.
+Comme son nom l'indique, le pilotage progressif est basé sur uen direction plus progressive et asservie à votre vitesse.
 Cela augmente considérablement la précision des manœuvres à grande vitesse.
 Sur les routes sinueuses et aux carrefours, le conducteur constatera une réponse plus dynamique grâce à la direction plus directe.
-Ce mode est spécialement conçu pour les manettes de jeu et les volants à moyen et bas degrés. Vous pouvez modifier les réglages pour mieux adapter votre matériel et votre style de conduite en appuyant sur "RSHIFT + R".
+Ce mod est spécialement conçu pour les manettes de jeu et les volants à degrés de rotation réduits. Vous pouvez modifier les réglages pour mieux adapter votre matériel et votre style de conduite en appuyant sur "RSHIFT + R".
 En mode multijoueur, chacun aura ses propres paramètres personnalisés.
 
 Changelog ${version}:
@@ -58,66 +58,79 @@ Changelog ${version}:
 	<l10n>
 		<text name="ps_mod_settings_title">
 			<en>Progressive Steering Settings</en>
+			<fr>Paramètres de la direction progressive</fr>
 			<de>Progressive Steering einstellungen</de>
 			<pl>Ustawienia Progressive Steering</pl>
 		</text>
 		<text name="ps_setting_precision">
 			<en>Precision</en>
+			<fr>Précision</fr>
 			<de>Genauigkeit</de>
 			<pl>Precyzja</pl>
 		</text>
 		<text name="ps_setting_precision_1">
 			<en>Low</en>
+			<fr>Basse</fr>
 			<de>Niedrig</de>
 			<pl>Niska</pl>
 		</text>
 		<text name="ps_setting_precision_2">
 			<en>Medium</en>
+			<fr>Moyenne</fr>
 			<de>Mittel</de>
 			<pl>Średnia</pl>
 		</text>
 		<text name="ps_setting_precision_3">
 			<en>High</en>
+			<fr>Haute</fr>
 			<de>Hoch</de>
 			<pl>Wysoka</pl>
 		</text>
 		<text name="ps_setting_precision_4">
 			<en>Very High</en>
+			<fr>Très haute</fr>
 			<de>Sehr hoch</de>
 			<pl>Bardzo wysoka</pl>
 		</text>
 		<text name="ps_setting_precision_5">
 			<en>Partial</en>
+			<fr>Partielle</fr>
 			<de>Teilweise</de>
 			<pl>Częściowa</pl>
 		</text>
 		<text name="ps_setting_precision_6">
 			<en>Smooth</en>
+			<fr>Linéaire</fr>
 			<de>Glatt</de>
 			<pl>Gładka</pl>
 		</text>
 		<text name="ps_setting_precision_tooltip">
 			<en>Choose the precision that better fit with your hardware and driving style.</en>
+			<fr>Choisissez votre précision qui s'adapte le mieux à votre équipement et votre style de conduite</fr>
 			<de>Wählen Sie die Präzision, die besser mit Ihrer Hardware und Ihrem Fahrstil passt.</de>
 			<pl>Wybierz precyzję, która najlepiej lepiej pasuje do Twojego sprzętu i stylu jazdy.</pl>
 		</text>
 		<text name="ps_setting_enabled">
 			<en>Enabled</en>
+			<fr>Activée</fr>
 			<de>Aktiviert</de>
 			<pl>Włączona</pl>
 		</text>
 		<text name="ps_setting_enabled_tooltip">
 			<en>Enable / Disable progressive steering.</en>
+			<fr>Active / Désactive la direction progressive</fr>
 			<de>Aktivieren / Deaktivieren Der Progressive Steering.</de>
 			<pl>Włącz/Wyłącz Progressive Steering</pl>
 		</text>
 		<text name="ps_setting_a_enabled">
 			<en>Adaptive Steering</en>
+			<fr>Direction progressive</fr>
 			<de>Adaptive Lenkung</de>
 			<pl>Sterowania adaptacyjne</pl>
 		</text>
 		<text name="ps_setting_a_enabled_tooltip">
 			<en>Enable / Disable adaptive steering (increase control at high speeds).</en>
+			<fr>Active / Désactive la direction progressive (meilleur contrôle à grande vitesse)</fr>
 			<de>Aktivieren / Deaktivieren der adaptiven Lenkung (Erhöhung der Kontrolle bei hohen Geschwindigkeiten).</de>
 			<pl>Włącza/Wyłącza sterowania adaptacyjne (zwiększona kntrola przy wyższej prędkości).</pl>
 		</text>
